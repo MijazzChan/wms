@@ -1,0 +1,33 @@
+spring:
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML
+    encoding: UTF-8
+    servlet:
+      content-type: text/html
+    cache: false
+
+  datasource:
+    url: jdbc:mysql://192.168.123.4:10000/wms?useUnicode=ture
+    username: wms
+    password: wms
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL57Dialect
+  main:
+    allow-bean-definition-overriding: true
+  servlet:
+    multipart:
+      max-request-size: 100MB
+logging:
+  org.hibernate.type.descriptor.sql.BasicBinder: trace
+
+server:
+  port: 8101
+
