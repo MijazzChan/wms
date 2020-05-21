@@ -1,6 +1,7 @@
 package com.zstu.mijazz.wms.service;
 
 import com.zstu.mijazz.wms.ResultReturn;
+import com.zstu.mijazz.wms.config.TokenUtil;
 import com.zstu.mijazz.wms.entity.Employee;
 import com.zstu.mijazz.wms.repository.EmployeeRepository;
 import org.springframework.stereotype.Service;
@@ -60,5 +61,13 @@ public class EmployeeService {
         }
         employeeRepository.deleteById(emId);
         return new ResultReturn<>(200, "OK", "OK");
+    }
+
+    public ResultReturn<String> checkPasswd(String emId, String emPasswd) {
+        Employee employee = employeeRepository.findByEmId(Long.valueOf(emId));
+        if (employee != null && emPasswd.equals(employee.getPasswd())) {
+            return new ResultReturn<>(200, "OK", TokenUtil.sign(employee));
+        }
+        return new ResultReturn<>(300, "ERR", "NO matching credential");
     }
 }

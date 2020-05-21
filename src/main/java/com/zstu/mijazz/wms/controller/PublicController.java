@@ -11,6 +11,11 @@ public class PublicController {
         return dashboard();
     }
 
+    @RequestMapping("/login")
+    public String login() {
+        return "login.html";
+    }
+
     @RequestMapping("/dashboard")
     public String dashboard() {
         return "dashboard.html";
@@ -29,5 +34,10 @@ public class PublicController {
     @RequestMapping("/manage")
     public String manage() {
         return "manage.html";
+    }
+
+    @RequestMapping("/log")
+    public String log() {
+        return "log.html";
     }
 }

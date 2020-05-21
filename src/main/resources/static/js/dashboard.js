@@ -9,6 +9,9 @@ function getdataandlable() {
             type: "get",
             contentType: false,
             processData: false,
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader("Access-Token", sessionStorage.getItem("Access-Token"));
+        },
             success: function (data) {
                 things = data["content"];
                 for (i = 0; i < 7; i++) {
@@ -59,6 +62,9 @@ function rendertable() {
             type: "get",
             contentType: false,
             processData: false,
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader("Access-Token", sessionStorage.getItem("Access-Token"));
+        },
             success: function (data) {
                 things = data["content"];
                 var str = "";
@@ -109,6 +115,9 @@ function searchnow() {
             contentType: false,
             processData: false,
             data: formData,
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader("Access-Token", sessionStorage.getItem("Access-Token"));
+            },
             success: function (data) {
                 renderquerytable(data);
             },
@@ -124,6 +133,9 @@ function searchnow() {
             contentType: false,
             processData: false,
             data: formData,
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader("Access-Token", sessionStorage.getItem("Access-Token"));
+            },
             success: function (data) {
                 renderquerytable(data);
             },
@@ -139,6 +151,9 @@ function searchnow() {
             contentType: false,
             processData: false,
             data: formData,
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader("Access-Token", sessionStorage.getItem("Access-Token"));
+            },
             success: function (data) {
                 renderquerytable(data);
             },

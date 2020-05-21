@@ -29,9 +29,13 @@ public class InstockService {
         return resultReturn;
     }
 
-    public ResultReturn<Iterable<Instock>> findRecentInstock() {
+    public ResultReturn<Iterable<Instock>> findRecentInstock(boolean is10) {
         Iterable<Instock> list;
-        list = instockRepository.findAll();
+        if (is10){
+            list = instockRepository.findAllByOrOrderByDateDescL10();
+        }else {
+            list = instockRepository.findAllByOrderByDateDesc();
+        }
         return new ResultReturn<>(200, "OK", list);
     }
 }

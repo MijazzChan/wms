@@ -59,12 +59,22 @@ public class ApiController {
 
     @GetMapping(value = "/getrecentout", produces = "application/json")
     public ResultReturn<Iterable<Outstock>> getrecentout() {
-        return outstockService.findRecentOutstock();
+        return outstockService.findRecentOutstock(false);
+    }
+
+    @GetMapping(value = "/getrecentout10", produces = "application/json")
+    public ResultReturn<Iterable<Outstock>> getrecentout10() {
+        return outstockService.findRecentOutstock(true);
     }
 
     @GetMapping(value = "/getrecentin", produces = "application/json")
     public ResultReturn<Iterable<Instock>> getrecentin() {
-        return instockService.findRecentInstock();
+        return instockService.findRecentInstock(false);
+    }
+
+    @GetMapping(value = "getrecentin10", produces = "application/json")
+    public ResultReturn<Iterable<Instock>> getrecentin10() {
+        return instockService.findRecentInstock(true);
     }
 
     @GetMapping(value = "/getemployee", produces = "application/json")

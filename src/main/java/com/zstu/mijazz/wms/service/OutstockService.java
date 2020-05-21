@@ -30,9 +30,13 @@ public class OutstockService {
         return resultReturn;
     }
 
-    public ResultReturn<Iterable<Outstock>> findRecentOutstock() {
+    public ResultReturn<Iterable<Outstock>> findRecentOutstock(boolean is10) {
         Iterable<Outstock> list;
-        list = outstockRepository.findAll();
+        if (is10){
+            list = outstockRepository.findAllByOrOrderByDateDescL10();
+        }else {
+            list = outstockRepository.findAllByOrderByDateDesc();
+        }
         return new ResultReturn<>(200, "OK", list);
     }
 }

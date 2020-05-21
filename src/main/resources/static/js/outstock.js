@@ -9,6 +9,9 @@ function freshtable() {
             type: "get",
             contentType: false,
             processData: false,
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader("Access-Token", sessionStorage.getItem("Access-Token"));
+        },
             success: function (data) {
                 things = data["content"];
                 var str = "";
@@ -34,6 +37,9 @@ function outputItem() {
         contentType: false,
         processData: false,
         data: formData,
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader("Access-Token", sessionStorage.getItem("Access-Token"));
+        },
         success: function (data) {
             if (data.code == 200) {
                 document.getElementById("status1").innerHTML = tick;
@@ -56,6 +62,9 @@ function delItem() {
         contentType: false,
         processData: false,
         data: formData,
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader("Access-Token", sessionStorage.getItem("Access-Token"));
+        },
         success: function (data) {
             if (data.code == 200) {
                 document.getElementById("status2").innerHTML = tick;
