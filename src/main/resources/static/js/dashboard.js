@@ -164,14 +164,13 @@ function searchnow() {
     }
 }
 
-
-
-getdataandlable();
-renderchart();
-rendertable();
-
 $("#queryinput").keypress(function (event) {
     if (event.which === 13) {
         searchnow();
     }
 })
+
+
+getdataandlable();
+renderchart();
+rendertable();

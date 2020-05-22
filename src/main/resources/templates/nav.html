@@ -6,7 +6,10 @@
         <a class="navbar-brand col-sm-3 col-md-2 mr-0" style="font-size: 1.3rem" href="/">仓储管理系统</a>
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
-                <a class="nav-link" href="/logout">登出</a>
+                <a class="nav-link" href="/login" onclick="function clean() {
+    sessionStorage.removeItem('emId');
+    sessionStorage.removeItem('Access-Token');
+                }">登出</a>
             </li>
         </ul>
     </nav>

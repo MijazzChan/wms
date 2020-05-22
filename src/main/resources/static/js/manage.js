@@ -3,17 +3,17 @@ window.lableSet = [];
 window.dataSet = [];
 
 function renderemployee(){
-    $.ajax("/api/getemployee", {
-            type: "get",
-            contentType: false,
-            processData: false,
-        beforeSend: function(xhr) {
+    $.ajax("/adminapi/getemployee", {
+        type: "get",
+        contentType: false,
+        processData: false,
+        beforeSend: function (xhr) {
             xhr.setRequestHeader("Access-Token", sessionStorage.getItem("Access-Token"));
         },
-            success: function (data) {
-                things = data["content"];
-                var str = "";
-                for (i in things) {
+        success: function (data) {
+            things = data["content"];
+            var str = "";
+            for (i in things) {
                     str = str + "<tr>" + "<td>" + i + "</td>" + "<td>" + things[i]["emId"] + "</td>" + "<td>" + things[i]["emName"] + "</td>" + "<td>" + ((things[i]["emSex"] === 1) ? "男" : "女") + "</td>" + "<td>" + ((things[i]["admin"] === true) ? "是" : "否") + "</td>" +  "<td><button class='btn btn-sm btn-primary' onclick='resetemployee(this)' emid='" + things[i]["emId"] + "'>重置</button>&nbsp;&nbsp;" + "<button class='btn btn-sm btn-danger' onclick='delemployee(this)' emid='" + things[i]["emId"] + "'>删除</button></td>" + "</tr>";
                 }
                 document.getElementById("mantable").innerHTML = str;
@@ -30,12 +30,12 @@ function delemployee(obj) {
     var emId = obj.getAttribute("emid");
     var formData = new FormData();
     formData.append("emid", emId);
-    $.ajax("/api/delemployee", {
+    $.ajax("/adminapi/delemployee", {
         type: "post",
         contentType: false,
         processData: false,
         data: formData,
-        beforeSend: function(xhr) {
+        beforeSend: function (xhr) {
             xhr.setRequestHeader("Access-Token", sessionStorage.getItem("Access-Token"));
         },
         success: function (data) {
@@ -52,17 +52,22 @@ function resetemployee(obj) {
     var emId = obj.getAttribute("emid");
     var formData = new FormData();
     formData.append("emid", emId);
-    $.ajax("/api/resetemployee", {
+    $.ajax("/adminapi/resetemployee", {
         type: "post",
         contentType: false,
         processData: false,
         data: formData,
-        beforeSend: function(xhr) {
+        beforeSend: function (xhr) {
             xhr.setRequestHeader("Access-Token", sessionStorage.getItem("Access-Token"));
         },
         success: function (data) {
-            obj.className = "btn btn-sm btn-success";
-            obj.innerHTML = "成功";
+            if (data.code == 200) {
+                obj.className = "btn btn-sm btn-success";
+                obj.innerHTML = "成功";
+            } else {
+                obj.className = "btn btn-sm btn-danger";
+                obj.innerHTML = "错误";
+            }
         },
         error: function () {
             alert('Err ajax');

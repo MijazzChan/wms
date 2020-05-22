@@ -33,7 +33,7 @@
             <strong>Please login first.</strong>
         </div>
     </div>
-    <img alt="" class="mb-4" height="72" th:src="@{/img/logo.jpg}" width="72">
+    <img class="mb-4" height="72" width="72" th:src="@{/img/zstu.svg}">
     <h1 class="h3 mb-3 font-weight-normal">仓储管理系统</h1>
     <label class="sr-only" for="loginname">雇员ID</label>
     <input autofocus class="form-control" name="loginname" id="loginname" placeholder="雇员ID" required type="text">
@@ -57,6 +57,7 @@
             data: formData,
             success: function (data) {
                 if (data.code === 200){
+                    sessionStorage.setItem("emId", data.message);
                     sessionStorage.setItem("Access-Token", data.content);
                     window.location.href = "/dashboard?Access-Token=" + data.content;
                 }else if (data.code === 300){

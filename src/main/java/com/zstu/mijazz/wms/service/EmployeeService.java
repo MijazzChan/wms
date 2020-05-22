@@ -1,9 +1,11 @@
 package com.zstu.mijazz.wms.service;
 
 import com.zstu.mijazz.wms.ResultReturn;
-import com.zstu.mijazz.wms.config.TokenUtil;
+import com.zstu.mijazz.wms.Utils.PasswdUtil;
+import com.zstu.mijazz.wms.Utils.TokenUtil;
 import com.zstu.mijazz.wms.entity.Employee;
 import com.zstu.mijazz.wms.repository.EmployeeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -14,6 +16,12 @@ import javax.transaction.Transactional;
 public class EmployeeService {
     @Resource
     EmployeeRepository employeeRepository;
+
+    @Autowired
+    TokenUtil tokenUtil;
+
+    @Autowired
+    PasswdUtil passwdUtil;
 
     public ResultReturn<Iterable<Employee>> getAllEmployee() {
         return new ResultReturn<>(200, "OK", employeeRepository.findAll());
@@ -65,9 +73,18 @@ public class EmployeeService {
 
     public ResultReturn<String> checkPasswd(String emId, String emPasswd) {
         Employee employee = employeeRepository.findByEmId(Long.valueOf(emId));
-        if (employee != null && emPasswd.equals(employee.getPasswd())) {
-            return new ResultReturn<>(200, "OK", TokenUtil.sign(employee));
+        if (employee != null && passwdUtil.isPasswdEqual(emPasswd, employee.getPasswd())) {
+            return new ResultReturn<>(200, emId, tokenUtil.sign(employee));
         }
         return new ResultReturn<>(300, "ERR", "NO matching credential");
+    }
+
+    public ResultReturn<String> resetPasswd(String emId) {
+        Employee employee = employeeRepository.findByEmId(Long.valueOf(emId));
+        if (employee != null) {
+            employee.setPasswd(passwdUtil.resetPasswdAsName(emId));
+            return new ResultReturn<>(200, "OK", "Password Reset");
+        }
+        return new ResultReturn<>(300, "ERR", "Unexpected Error");
     }
 }

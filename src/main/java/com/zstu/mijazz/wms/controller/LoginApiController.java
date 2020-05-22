@@ -18,4 +18,9 @@ public class LoginApiController {
         String emPasswd = password.strip().trim();
         return employeeService.checkPasswd(emId, emPasswd);
     }
+
+    @RequestMapping(value = "/logout")
+    public String logout() {
+        return "redirect:/login";
+    }
 }

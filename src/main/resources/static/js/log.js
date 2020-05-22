@@ -1,9 +1,9 @@
 function getrecentin(is10) {
     var things = [];
     if (is10){
-        ajaxUrl = "/api/getrecentin10";
+        ajaxUrl = "/adminapi/getrecentin10";
     }else {
-        ajaxUrl = "/api/getrecentin";
+        ajaxUrl = "/adminapi/getrecentin";
     }
     $.ajax(ajaxUrl, {
             type: "get",
@@ -30,9 +30,9 @@ function getrecentin(is10) {
 function getrecentout(is10) {
     var things = [];
     if (is10){
-        ajaxUrl = "/api/getrecentout10";
+        ajaxUrl = "/adminapi/getrecentout10";
     }else {
-        ajaxUrl = "/api/getrecentout";
+        ajaxUrl = "/adminapi/getrecentout";
     }
     $.ajax(ajaxUrl, {
             type: "get",

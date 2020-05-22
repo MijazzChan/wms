@@ -30,7 +30,7 @@ function freshtable() {
 function outputItem() {
     var formData = new FormData();
     formData.append("itemid", $("#itemId1").val());
-    formData.append("viaid", "201701");
+    formData.append("viaid", sessionStorage.getItem("emId"));
     formData.append("itemcount", $("#itemCount1").val());
     $.ajax("/api/outputitem", {
         type: "post",
@@ -57,12 +57,12 @@ function outputItem() {
 function delItem() {
     var formData = new FormData();
     formData.append("itemid", $("#itemId2").val());
-    $.ajax("/api/delitem", {
+    $.ajax("/adminapi/delitem", {
         type: "post",
         contentType: false,
         processData: false,
         data: formData,
-        beforeSend: function(xhr) {
+        beforeSend: function (xhr) {
             xhr.setRequestHeader("Access-Token", sessionStorage.getItem("Access-Token"));
         },
         success: function (data) {
@@ -78,3 +78,4 @@ function delItem() {
         }
     })
 }
+

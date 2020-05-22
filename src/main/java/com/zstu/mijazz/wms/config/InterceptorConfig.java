@@ -8,14 +8,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Configuration
-public class LoginInterceptorConfig implements WebMvcConfigurer {
-    private LoginInterceptor interceptor;
+public class InterceptorConfig implements WebMvcConfigurer {
+    private BasicAuthInterceptor basicAuthInterceptor;
+    private AdminAuthInteceptor adminAuthInteceptor;
 
 //    @Value("interceptorURL.jump")
 //    private String excludeFromConfigFile;
 
-    public LoginInterceptorConfig(LoginInterceptor interceptor){
-        this.interceptor = interceptor;
+    public InterceptorConfig(BasicAuthInterceptor basicAuthInterceptor, AdminAuthInteceptor adminAuthInteceptor) {
+        this.basicAuthInterceptor = basicAuthInterceptor;
+        this.adminAuthInteceptor = adminAuthInteceptor;
     }
 
     @Override
@@ -29,8 +31,9 @@ public class LoginInterceptorConfig implements WebMvcConfigurer {
         excludePath.add("/img/**");
         excludePath.add("/favicon.ico");
         excludePath.add("/api/login");
-
-        registry.addInterceptor(interceptor).addPathPatterns("/**").excludePathPatterns(excludePath);
+        excludePath.add("/adminapi/**");
+        registry.addInterceptor(adminAuthInteceptor).addPathPatterns("/adminapi/**");
+        registry.addInterceptor(basicAuthInterceptor).addPathPatterns("/**").excludePathPatterns(excludePath);
         WebMvcConfigurer.super.addInterceptors(registry);
 
     }

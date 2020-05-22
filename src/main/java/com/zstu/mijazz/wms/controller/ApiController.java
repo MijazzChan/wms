@@ -57,36 +57,8 @@ public class ApiController {
         return storageService.findallStoragedesc();
     }
 
-    @GetMapping(value = "/getrecentout", produces = "application/json")
-    public ResultReturn<Iterable<Outstock>> getrecentout() {
-        return outstockService.findRecentOutstock(false);
-    }
 
-    @GetMapping(value = "/getrecentout10", produces = "application/json")
-    public ResultReturn<Iterable<Outstock>> getrecentout10() {
-        return outstockService.findRecentOutstock(true);
-    }
 
-    @GetMapping(value = "/getrecentin", produces = "application/json")
-    public ResultReturn<Iterable<Instock>> getrecentin() {
-        return instockService.findRecentInstock(false);
-    }
-
-    @GetMapping(value = "getrecentin10", produces = "application/json")
-    public ResultReturn<Iterable<Instock>> getrecentin10() {
-        return instockService.findRecentInstock(true);
-    }
-
-    @GetMapping(value = "/getemployee", produces = "application/json")
-    public ResultReturn<Iterable<Employee>> getallemployee() {
-        return employeeService.getAllEmployee();
-    }
-
-    @PostMapping(value = "/delemployee", produces = "application/json")
-    public ResultReturn<String> delemployee(@RequestParam String emid) {
-        Long id = Long.valueOf(emid);
-        return employeeService.delEmployee(id);
-    }
 
     @PostMapping(value = "/inputitem", produces = "application/json")
     public ResultReturn<String> inputitem(@RequestParam String itemid, @RequestParam String viaid, @RequestParam String itemcount) {
@@ -96,11 +68,6 @@ public class ApiController {
         return instockService.inputItem(itemId, viaId, itemCount);
     }
 
-    @PostMapping(value = "/newitem", produces = "application/json")
-    public ResultReturn<String> newitem(@RequestParam String itemid, @RequestParam String itemname) {
-        Long itemId = Long.valueOf(itemid);
-        return storageService.newStorage(itemId, itemname);
-    }
 
     @PostMapping(value = "/outputitem", produces = "application/json")
     public ResultReturn<String> outputitem(@RequestParam String itemid, @RequestParam String viaid, @RequestParam String itemcount) {
@@ -110,11 +77,6 @@ public class ApiController {
         return outstockService.outputItem(itemId, viaId, itemCount);
     }
 
-    @PostMapping(value = "/delitem", produces = "application/json")
-    public ResultReturn<String> delitem(@RequestParam String itemid) {
-        Long itemId = Long.valueOf(itemid);
-        return storageService.delStorage(itemId);
-    }
 
     @PostMapping(value = "/findstoragebyid", produces = "application/json")
     public ResultReturn<Iterable<Storage>> findstoragebyid(@RequestParam String itemid) {
