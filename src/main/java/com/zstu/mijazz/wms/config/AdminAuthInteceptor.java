@@ -33,6 +33,7 @@ public class AdminAuthInteceptor implements HandlerInterceptor {
 
         Map<String, Claim> claims = tokenUtil.verify(token);
 
+
         if (claims != null){
             request.setAttribute("emId", claims.get("emId"));
             request.setAttribute("emName", claims.get("emName"));
