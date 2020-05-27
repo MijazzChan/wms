@@ -86,7 +86,7 @@ public class ApiController {
 
     @PostMapping(value = "/findstoragebyname", produces = "application/json")
     public ResultReturn<Iterable<Storage>> findstoragebyname(@RequestParam String itemname) {
-        return storageService.findStorageNameLike(itemname);
+        return storageService.findStorageNameLike("%" + itemname + "%");
     }
 
     @PostMapping(value = "/findstoragebetween", produces = "application/json")

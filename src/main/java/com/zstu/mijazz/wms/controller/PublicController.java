@@ -1,10 +1,16 @@
 package com.zstu.mijazz.wms.controller;
 
+import com.zstu.mijazz.wms.Utils.Redis4TokenUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class PublicController {
+
+    @Autowired
+    Redis4TokenUtil redis4TokenUtil;
 
     @RequestMapping("/")
     public String index() {
@@ -40,4 +46,6 @@ public class PublicController {
     public String log() {
         return "log.html";
     }
+
+
 }

@@ -13,12 +13,16 @@ function getrecentin(is10) {
             xhr.setRequestHeader("Access-Token", sessionStorage.getItem("Access-Token"));
         },
             success: function (data) {
-                things = data["content"];
-                var str = "";
-                for (i in things) {
-                    str = str + "<tr>" + "<td>" + things[i]["transactionId"] + "</td>" + "<td>" + things[i]["date"] + "</td>" + "<td>" + things[i]["itemId"] + "</td>" + "<td>" + things[i]["inCount"] + "</td>" + "<td>" + things[i]["viaId"] + "</td>" + "</tr>";
+                if (data.code === 200) {
+                    things = data["content"];
+                    var str = "";
+                    for (i in things) {
+                        str = str + "<tr>" + "<td>" + things[i]["transactionId"] + "</td>" + "<td>" + things[i]["date"] + "</td>" + "<td>" + things[i]["itemId"] + "</td>" + "<td>" + things[i]["inCount"] + "</td>" + "<td>" + things[i]["viaId"] + "</td>" + "</tr>";
+                    }
+                    document.getElementById("intable").innerHTML = str;
+                } else if (data.code === 302) {
+                    alert('你无权访问');
                 }
-                document.getElementById("intable").innerHTML = str;
             },
             error: function () {
                 alert('Error ajax to server.');
@@ -42,12 +46,17 @@ function getrecentout(is10) {
             xhr.setRequestHeader("Access-Token", sessionStorage.getItem("Access-Token"));
         },
             success: function (data) {
-                things = data["content"];
-                var str = "";
-                for (i in things) {
-                    str = str + "<tr>" + "<td>" + things[i]["transactionId"] + "</td>" + "<td>" + things[i]["date"] + "</td>" + "<td>" + things[i]["itemId"] + "</td>" + "<td>" + things[i]["outCount"] + "</td>" + "<td>" + things[i]["viaId"] + "</td>" + "</tr>";
+                if (data.code === 200) {
+                    things = data["content"];
+                    var str = "";
+                    for (i in things) {
+                        str = str + "<tr>" + "<td>" + things[i]["transactionId"] + "</td>" + "<td>" + things[i]["date"] + "</td>" + "<td>" + things[i]["itemId"] + "</td>" + "<td>" + things[i]["outCount"] + "</td>" + "<td>" + things[i]["viaId"] + "</td>" + "</tr>";
+                    }
+                    document.getElementById("outtable").innerHTML = str;
+                } else if (data.code === 302) {
+                    alert('你无权访问');
                 }
-                document.getElementById("outtable").innerHTML = str;
+
             },
             error: function () {
                 alert('Error ajax to server.');

@@ -1,6 +1,7 @@
 package com.zstu.mijazz.wms.config;
 
 import com.auth0.jwt.interfaces.Claim;
+import com.zstu.mijazz.wms.ResultReturn;
 import com.zstu.mijazz.wms.Utils.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -34,13 +35,14 @@ public class AdminAuthInteceptor implements HandlerInterceptor {
         Map<String, Claim> claims = tokenUtil.verify(token);
 
 
-        if (claims != null){
+        if (claims != null && claims.get("isAdmin").asBoolean()) {
             request.setAttribute("emId", claims.get("emId"));
             request.setAttribute("emName", claims.get("emName"));
             return true;
+        } else {
+            badAuthGo(response);
+            return false;
         }
-        noAuthGo(response);
-        return false;
     }
 
     @Override
@@ -55,5 +57,9 @@ public class AdminAuthInteceptor implements HandlerInterceptor {
 
     public static void noAuthGo(HttpServletResponse response) throws IOException {
         response.sendRedirect("/login?noauth");
+    }
+
+    public static void badAuthGo(HttpServletResponse response) throws IOException {
+        response.getWriter().println(new ResultReturn<>(302, "Bad Auth", "权限不足"));
     }
 }
