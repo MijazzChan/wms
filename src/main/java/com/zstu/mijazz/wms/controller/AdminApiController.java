@@ -1,6 +1,7 @@
 package com.zstu.mijazz.wms.controller;
 
 import com.zstu.mijazz.wms.ResultReturn;
+import com.zstu.mijazz.wms.Utils.PasswdUtil;
 import com.zstu.mijazz.wms.entity.Employee;
 import com.zstu.mijazz.wms.entity.Instock;
 import com.zstu.mijazz.wms.entity.Outstock;
@@ -26,6 +27,9 @@ public class AdminApiController {
     @Autowired
     EmployeeService employeeService;
 
+    @Autowired
+    PasswdUtil passwdUtil;
+
     @GetMapping(value = "/getemployee", produces = "application/json")
     public ResultReturn<Iterable<Employee>> getallemployee() {
         return employeeService.getAllEmployee();
@@ -35,6 +39,14 @@ public class AdminApiController {
     public ResultReturn<String> delemployee(@RequestParam String emid) {
         Long id = Long.valueOf(emid);
         return employeeService.delEmployee(id);
+    }
+
+    @PostMapping(value = "/addemployee", produces = "application/json")
+    public ResultReturn<String> addemployee(@RequestParam String emid, @RequestParam String emname, @RequestParam String emsex) {
+        Long emId = Long.valueOf(emid);
+        String emName = emname.trim();
+        Integer emSex = Integer.valueOf(emsex);
+        return employeeService.addEmployee(emId, emName, 20, emSex, passwdUtil.resetPasswdAsName(emid));
     }
 
     @PostMapping(value = "/resetemployee", produces = "application/json")

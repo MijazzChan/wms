@@ -89,4 +89,40 @@ function resetemployee(obj) {
     });
 }
 
+function addEmployyeeRow() {
+    document.getElementById("mantable").innerHTML += "<tr><td>?</td>><td><input id='addemid' type='text' class='form-control' placeholder='雇员ID'></td><td><input id='addemname' type='text' class='form-control' placeholder='雇员姓名'></td><td><input id='addemsex' type='text' class='form-control' placeholder='雇员性别'></td><td>否</td><td><button class='btn btn-sm btn-primary' onclick='addEmNow(this)'>新增</td></tr>";
+}
+
+function addEmNow(obj) {
+    var formData = new FormData();
+    formData.append("emid", $("#addemid").val().trim());
+    formData.append("emname", $("#addemname").val().trim());
+    formData.append("emsex", $("#addemsex").val() === "男" ? 1 : 0);
+
+    $.ajax("/adminapi/addemployee", {
+        type: "post",
+        contentType: false,
+        processData: false,
+        data: formData,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Access-Token", sessionStorage.getItem("Access-Token"));
+        },
+        success: function (data) {
+            if (data.code === 200) {
+                obj.className = "btn btn-sm btn-success";
+                obj.innerHTML = "成功";
+            } else if (data.code === 300) {
+                obj.className = "btn btn-sm btn-danger";
+                obj.innerHTML = "错误";
+            } else {
+                alert("你无权访问");
+            }
+            renderemployee();
+        },
+        error: function () {
+            alert('Err ajax');
+        }
+    });
+}
+
 renderemployee();
