@@ -62,7 +62,7 @@ public class EmployeeService {
         return new ResultReturn<>(200, "OK", emName);
     }
 
-    public ResultReturn<String> delEmployee(Long emId){
+    public ResultReturn<String> delEmployee(Long emId) {
         Employee employee = employeeRepository.findByEmId(emId);
         if (employee == null) {
             return new ResultReturn<>(300, "ERR", "No employee has been found");

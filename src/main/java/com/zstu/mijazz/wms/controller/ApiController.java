@@ -1,17 +1,12 @@
 package com.zstu.mijazz.wms.controller;
 
 import com.zstu.mijazz.wms.ResultReturn;
-import com.zstu.mijazz.wms.entity.Employee;
-import com.zstu.mijazz.wms.entity.Instock;
-import com.zstu.mijazz.wms.entity.Outstock;
 import com.zstu.mijazz.wms.entity.Storage;
-import com.zstu.mijazz.wms.repository.EmployeeRepository;
 import com.zstu.mijazz.wms.service.EmployeeService;
 import com.zstu.mijazz.wms.service.InstockService;
 import com.zstu.mijazz.wms.service.OutstockService;
 import com.zstu.mijazz.wms.service.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -56,8 +51,6 @@ public class ApiController {
     public ResultReturn<Iterable<Storage>> getstoragedesc() {
         return storageService.findallStoragedesc();
     }
-
-
 
 
     @PostMapping(value = "/inputitem", produces = "application/json")

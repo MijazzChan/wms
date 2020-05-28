@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.validation.constraints.Min;
 import java.io.Serializable;
 
 @Entity
@@ -18,6 +19,7 @@ public class Storage implements Serializable {
 
     private String itemName;
 
+    @Min(0)
     private Long itemAmount;
 
     public Storage(Long itemId, String itemName) {

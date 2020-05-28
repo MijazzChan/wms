@@ -56,11 +56,11 @@
             processData: false,
             data: formData,
             success: function (data) {
-                if (data.code === 200){
+                if (data.code === 200) {
                     sessionStorage.setItem("emId", data.message);
                     sessionStorage.setItem("Access-Token", data.content);
                     window.location.href = "/dashboard?Access-Token=" + data.content;
-                }else if (data.code === 300){
+                } else if (data.code === 300) {
                     window.location.href = "/login?badauth";
                 } else {
                     alert("Unexpected Error");

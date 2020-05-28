@@ -2,26 +2,26 @@ var things = [];
 window.lableSet = [];
 window.dataSet = [];
 
-function renderemployee(){
+function renderemployee() {
     $.ajax("/adminapi/getemployee", {
-        type: "get",
-        contentType: false,
-        processData: false,
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader("Access-Token", sessionStorage.getItem("Access-Token"));
-        },
-        success: function (data) {
-            if (data.code === 200) {
-                things = data["content"];
-                var str = "";
-                for (i in things) {
-                    str = str + "<tr>" + "<td>" + i + "</td>" + "<td>" + things[i]["emId"] + "</td>" + "<td>" + things[i]["emName"] + "</td>" + "<td>" + ((things[i]["emSex"] === 1) ? "男" : "女") + "</td>" + "<td>" + ((things[i]["admin"] === true) ? "是" : "否") + "</td>" + "<td><button class='btn btn-sm btn-primary' onclick='resetemployee(this)' emid='" + things[i]["emId"] + "'>重置</button>&nbsp;&nbsp;" + "<button class='btn btn-sm btn-danger' onclick='delemployee(this)' emid='" + things[i]["emId"] + "'>删除</button></td>" + "</tr>";
+            type: "get",
+            contentType: false,
+            processData: false,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Access-Token", sessionStorage.getItem("Access-Token"));
+            },
+            success: function (data) {
+                if (data.code === 200) {
+                    things = data["content"];
+                    var str = "";
+                    for (i in things) {
+                        str = str + "<tr>" + "<td>" + i + "</td>" + "<td>" + things[i]["emId"] + "</td>" + "<td>" + things[i]["emName"] + "</td>" + "<td>" + ((things[i]["emSex"] === 1) ? "男" : "女") + "</td>" + "<td>" + ((things[i]["admin"] === true) ? "是" : "否") + "</td>" + "<td><button class='btn btn-sm btn-primary' onclick='resetemployee(this)' emid='" + things[i]["emId"] + "'>重置</button>&nbsp;&nbsp;" + "<button class='btn btn-sm btn-danger' onclick='delemployee(this)' emid='" + things[i]["emId"] + "'>删除</button></td>" + "</tr>";
+                    }
+                    document.getElementById("mantable").innerHTML = str;
+                } else if (data.code === 302) {
+                    alert("你无权访问");
                 }
-                document.getElementById("mantable").innerHTML = str;
-            } else if (data.code === 302) {
-                alert("你无权访问");
-            }
-        },
+            },
             error: function () {
                 alert('Error ajax to server.');
             }

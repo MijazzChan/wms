@@ -1,14 +1,13 @@
 package com.zstu.mijazz.wms.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.relational.core.sql.In;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Min;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -22,6 +21,7 @@ public class Instock implements Serializable {
 
     private Long itemId;
 
+    @Min(1)
     private Long inCount;
 
     private Long viaId;

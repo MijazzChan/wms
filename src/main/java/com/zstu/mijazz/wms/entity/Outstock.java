@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Min;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -20,6 +21,7 @@ public class Outstock implements Serializable {
 
     private Long itemId;
 
+    @Min(1)
     private Long outCount;
 
     private Long viaId;

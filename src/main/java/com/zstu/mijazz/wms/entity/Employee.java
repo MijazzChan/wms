@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.io.Serializable;
 
 @Entity
@@ -18,8 +20,12 @@ public class Employee implements Serializable {
 
     private String emName;
 
+    @Min(0)
+    @Max(120)
     private int emAge;
 
+    @Min(0)
+    @Max(1)
     private int emSex;
 
     private String passwd;

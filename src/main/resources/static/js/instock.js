@@ -4,23 +4,23 @@ freshtable();
 
 function freshtable() {
     var things = [];
-    $.ajax("/api/getstorage",{
-            type: "get",
-            contentType: false,
-            processData: false,
-        beforeSend: function(xhr) {
+    $.ajax("/api/getstorage", {
+        type: "get",
+        contentType: false,
+        processData: false,
+        beforeSend: function (xhr) {
             xhr.setRequestHeader("Access-Token", sessionStorage.getItem("Access-Token"));
         },
-            success: function (data) {
-                things = data["content"];
-                var str = "";
-                for (i in things) {
-                    str = str+"<tr>"+"<td>"+i+"</td>"+"<td>" + things[i]["itemId"] + "</td>" + "<td>" + things[i]["itemName"] + "</td>" + "<td>" + things[i]["itemAmount"] + "</td>" + "</tr>";
-                }
-                document.getElementById("storagetable").innerHTML = str;
-            },
-            error: function () {
-                alert('Error ajax to server.');
+        success: function (data) {
+            things = data["content"];
+            var str = "";
+            for (i in things) {
+                str = str + "<tr>" + "<td>" + i + "</td>" + "<td>" + things[i]["itemId"] + "</td>" + "<td>" + things[i]["itemName"] + "</td>" + "<td>" + things[i]["itemAmount"] + "</td>" + "</tr>";
+            }
+            document.getElementById("storagetable").innerHTML = str;
+        },
+        error: function () {
+            alert('Error ajax to server.');
             }
         }
     )
@@ -36,14 +36,14 @@ function inputItem() {
         contentType: false,
         processData: false,
         data: formData,
-        beforeSend: function(xhr) {
+        beforeSend: function (xhr) {
             xhr.setRequestHeader("Access-Token", sessionStorage.getItem("Access-Token"));
         },
         success: function (data) {
             if (data.code == 200) {
                 document.getElementById("status1").innerHTML = tick;
                 freshtable();
-            }else {
+            } else {
                 document.getElementById("status1").innerHTML = cross + data.content;
             }
         },
@@ -69,7 +69,7 @@ function newItem() {
             if (data.code == 200) {
                 document.getElementById("status2").innerHTML = tick;
                 freshtable();
-            }else {
+            } else {
                 document.getElementById("status2").innerHTML = cross + data.content;
             }
         },

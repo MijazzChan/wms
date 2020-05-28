@@ -1,9 +1,7 @@
 package com.zstu.mijazz.wms.service;
 
 import com.zstu.mijazz.wms.ResultReturn;
-import com.zstu.mijazz.wms.entity.Instock;
 import com.zstu.mijazz.wms.entity.Outstock;
-import com.zstu.mijazz.wms.repository.InstockRepository;
 import com.zstu.mijazz.wms.repository.OutstockRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,9 +30,9 @@ public class OutstockService {
 
     public ResultReturn<Iterable<Outstock>> findRecentOutstock(boolean is10) {
         Iterable<Outstock> list;
-        if (is10){
+        if (is10) {
             list = outstockRepository.findAllByOrOrderByDateDescL10();
-        }else {
+        } else {
             list = outstockRepository.findAllByOrderByDateDesc();
         }
         return new ResultReturn<>(200, "OK", list);

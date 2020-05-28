@@ -2,14 +2,12 @@ package com.zstu.mijazz.wms.service;
 
 import com.zstu.mijazz.wms.ResultReturn;
 import com.zstu.mijazz.wms.entity.Storage;
-import com.zstu.mijazz.wms.repository.EmployeeRepository;
 import com.zstu.mijazz.wms.repository.StorageRepository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -61,7 +59,7 @@ public class StorageService {
             Long oldAmount = storage.getItemAmount();
             if (itemCount > oldAmount) {
                 return new ResultReturn<>(300, "ERR", "Capacity Error");
-            }else {
+            } else {
                 storage.setItemAmount(oldAmount - itemCount);
                 storageRepository.save(storage);
                 return new ResultReturn<>(200, "OK", "OK");
@@ -70,11 +68,11 @@ public class StorageService {
         return new ResultReturn<>(300, "ERR", "Item not found");
     }
 
-    public ResultReturn<Iterable<Storage>> findallStorage(){
+    public ResultReturn<Iterable<Storage>> findallStorage() {
         return new ResultReturn<>(200, "OK", storageRepository.findAll());
     }
 
-    public ResultReturn<Iterable<Storage>> findallStoragedesc(){
+    public ResultReturn<Iterable<Storage>> findallStoragedesc() {
         return new ResultReturn<>(200, "OK", storageRepository.findAllByOrderByItemAmountDesc());
     }
 

@@ -1,7 +1,6 @@
 package com.zstu.mijazz.wms.Utils;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
