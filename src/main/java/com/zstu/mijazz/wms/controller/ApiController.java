@@ -28,9 +28,9 @@ public class ApiController {
     public ResultReturn<String> instock(@RequestParam String id, @RequestParam String viaid, @RequestParam String count) {
         Long itemId = Long.valueOf(id);
         Long viaId = Long.valueOf(viaid);
-        Long itemcount = Long.valueOf(count);
+        Long itemCount = Long.valueOf(count);
 
-        return instockService.inputItem(itemId, viaId, itemcount);
+        return instockService.inputItem(itemId, viaId, itemCount);
     }
 
     @PostMapping(value = "/outstock", produces = "application/json")

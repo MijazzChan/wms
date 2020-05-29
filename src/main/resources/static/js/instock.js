@@ -40,7 +40,7 @@ function inputItem() {
             xhr.setRequestHeader("Access-Token", sessionStorage.getItem("Access-Token"));
         },
         success: function (data) {
-            if (data.code == 200) {
+            if (data.code === 200) {
                 document.getElementById("status1").innerHTML = tick;
                 freshtable();
             } else {
