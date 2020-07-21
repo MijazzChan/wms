@@ -60,6 +60,6 @@ public class AdminAuthInteceptor implements HandlerInterceptor {
     }
 
     public static void badAuthGo(HttpServletResponse response) throws IOException {
-        response.getWriter().println(new ResultReturn<>(302, "Bad Auth", "权限不足"));
+        response.getWriter().println(new ResultReturn<>(302, "Bad Auth", "Low Auth for Admin API"));
     }
 }
